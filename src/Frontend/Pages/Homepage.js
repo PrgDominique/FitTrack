@@ -1,34 +1,34 @@
-import React, {useEffect, useState} from 'react'
-import ExerciseDetails from '../../Components/ExerciseDetails'
-import ExerciseForm from '../../Components/ExerciseForm'
-
+import React, { useContext, useEffect } from "react";
+import ExerciseDetails from "../../Components/ExerciseDetails";
+import ExerciseForm from "../../Components/ExerciseForm";
+import { WorkoutsContext } from "../../Context/WorkoutContext";
 
 const Homepage = () => {
+  const { exercises, dispatch } = useContext(WorkoutsContext);
 
-   const [exercises, setExercise] = useState(null)
-
-  useEffect(()=> {
+  useEffect(() => {
     const fetchExercise = async () => {
-      const response = await fetch('exercise')
-    const json = await response.json()
-      if (response.ok){
-        setExercise(json)
+      const response = await fetch("exercise");
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "SET_WORKOUTS", payload: json });
       }
-  } 
-    fetchExercise()
-  },[])
+    };
+    fetchExercise();
+  }, [dispatch]);
 
   return (
-   <div>
-        <div>
-          {exercises && exercises.map((exercise) =>(
-            <ExerciseDetails key={exercise._id} exercise={exercise}/>
+    <div className="home">
+      <div className="workouts">
+        {exercises &&
+          exercises.map((exercise) => (
+            <ExerciseDetails key={exercise._id} exercise={exercise} />
           ))}
-        </div>
-        <ExerciseForm />
-        </div>
+      </div>
+      <ExerciseForm />
+    </div>
+  );
+};
 
-  )
-}
-
-export default Homepage
+export default Homepage;

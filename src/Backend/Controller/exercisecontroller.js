@@ -5,7 +5,7 @@ const exercises = require('../model/exercises')
 // get all data
 const getExercise = async (req, res) => {
     const exercise = await exercises.find({}).sort({createdAt: -1})
-res.status(200).json(exercise)
+res.status(200).json(exercise);
 }
 
 //get single data
@@ -31,7 +31,7 @@ const createExercise = async (req, res) =>{
     // add data in db
     try {
         const Exercise = await exercises.create({title, load, reps})
-        res.status(200).json(exercises)
+        res.status(200).json(Exercise)
     } catch(error){
         res.status(400).json({error: error.message})
     }

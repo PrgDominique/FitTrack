@@ -6,3 +6,8 @@
 > - React
 > - MongoDB
 > - Plain CSS
+
+#
+> To install and run you have to npm install both backend and frontend. After that npm i nodemon before run the project.
+
+> To run the project run project npm start in frontend folder and npm run dev in backend
